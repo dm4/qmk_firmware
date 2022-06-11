@@ -17,25 +17,35 @@
 
 // Defines names for use in layer keycodes and the keymap
 enum layer_number {
-    _BASE,
-    _LOWER,
+    _0,
+    _1,
+    _2,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [_BASE] = LAYOUT_all(
-        KC_1,
-        KC_2,
-        KC_3,
-        KC_4,
-        LT(_LOWER, KC_5),
+    [_0] = LAYOUT_all(
+        KC_MPRV,
+        LT(_1, KC_MPLY),
+        KC_MNXT,
+        KC_MUTE,
+        LT(_2, KC_MUTE),
         // Knob
         KC_MUTE
     ),
-    [_LOWER] = LAYOUT_all(
-        KC_BRMD,
-        KC_BRMU,
-        LSFT(KC_3),
-        RESET,
+    [_1] = LAYOUT_all(
+        LSFT(KC_LEFT),
+        _______,
+        LSFT(KC_RIGHT),
+        _______,
+        _______,
+        // Knob
+        _______
+    ),
+    [_2] = LAYOUT_all(
+        _______,
+        _______,
+        QK_MAKE,
+        QK_BOOT,
         _______,
         // Knob
         _______
@@ -45,11 +55,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 bool encoder_update_user(uint8_t index, bool counterclockwise) {
     if (index == 0) {
         if (get_highest_layer(layer_state|default_layer_state) > 0) {
-            /* Layer 1 */
+            /* Layer > 0 */
             if (counterclockwise) {
-                tap_code_delay(KC_BRMD, 10);
+                register_code(KC_LSFT);
+                tap_code(KC_LEFT);
+                unregister_code(KC_LSFT);
             } else {
-                tap_code_delay(KC_BRMU, 10);
+                register_code(KC_LSFT);
+                tap_code(KC_RIGHT);
+                unregister_code(KC_LSFT);
             }
         } else {
             /* Layer 0 */
