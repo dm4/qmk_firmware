@@ -4,6 +4,8 @@
 #include "suspend.h"
 #include "matrix.h"
 
+#ifndef RECORE // replace by ble51
+
 // TODO: Move to more correct location
 __attribute__((weak)) void matrix_power_up(void) {}
 __attribute__((weak)) void matrix_power_down(void) {}
@@ -49,3 +51,4 @@ bool suspend_wakeup_condition(void) {
     }
     return false;
 }
+#endif
