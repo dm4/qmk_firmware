@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -v
 set -e
 
 # get latest dm4 branch
@@ -15,3 +16,4 @@ git push origin master
 
 git co -
 git merge master --no-ff -m '[dm4] Merge upstream'
+git push origin dm4
