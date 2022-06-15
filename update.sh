@@ -4,7 +4,7 @@ set -e
 
 # get latest dm4 branch
 git co dm4
-git pull
+git pull --no-rebase --ff-only
 
 # pull from upstream/master
 git co master
@@ -14,4 +14,4 @@ git pull
 git push origin master
 
 git co -
-git rebase master
+git merge master --no-ff -m '[dm4] Merge upstream'
